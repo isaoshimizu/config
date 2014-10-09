@@ -62,11 +62,16 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'thinca/vim-ref.git'
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimshell'
+NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'chrishunt/color-schemes'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'Lokaltog/powerline'
+NeoBundle 'Lokaltog/powerline-fonts'
+NeoBundle 'tpope/vim-fugitive'
 
 NeoBundle 'Shougo/vimproc', {
   \ 'build' : {
@@ -161,3 +166,6 @@ endif
 
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
+" vim-airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1

@@ -1,7 +1,7 @@
 # .zshrc
 # Author: Isao Shimizu <isaoshimizu@gmail.com>
 
-fpath=(~/zsh/func ${fpath})
+fpath=(~/.zfunctions ${fpath})
 
 autoload -U compinit
 compinit
