@@ -103,7 +103,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # AWS CLI
-source /usr/local/share/zsh/site-functions/_aws
+source /usr/local/bin/aws_zsh_completer.sh
 
 # docker
 export DOCKER_HOST=tcp://localhost:4243
