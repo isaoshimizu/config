@@ -52,17 +52,30 @@ bindkey '^P' history-beginning-search-backward-end
 bindkey '^N' history-beginning-search-forward-end
 bindkey -e
 
-eval `gdircolors ~/.dir_colors`
 export TERM=xterm-256color
 
 # aliases
-alias ls='gls --color'
-alias la='gls -a --color'
-alias ll='gls -l --color'
-alias lla='gls -al --color'
-alias vim='/usr/local/bin/vim'
-alias emacs='/usr/local/bin/emacs'
-alias git='/usr/local/bin/git'
+case ${OSTYPE} in
+  darwin*)
+    eval `gdircolors ~/.dir_colors`
+    alias ls='gls --color'
+    alias la='gls -a --color'
+    alias ll='gls -l --color'
+    alias lla='gls -al --color'
+    alias vim='/usr/local/bin/vim'
+    alias emacs='/usr/local/bin/emacs'
+    alias git='/usr/local/bin/git'
+    alias sed='gsed'
+    ;;
+  linux*)
+    eval `dircolors ~/.dir_colors`
+    alias ls='ls --color'
+    alias la='ls -a --color'
+    alias ll='ls -l --color'
+    alias lla='ls -al --color'
+    ;;
+esac
+
 alias vi='vim'
 alias history='history 1'
 alias lv='lv -c -T8192'
@@ -71,7 +84,6 @@ alias java='java -Dfile.encoding=UTF-8'
 alias jar='jar -J-Dfile.encoding=UTF-8'
 alias kt='bundle exec kitchen'
 alias vim_neobundle_install='vim +NeoBundleInstall! +qall'
-alias sed='gsed'
 alias df='df -h'
 alias du='du -h'
 
