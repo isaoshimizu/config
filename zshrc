@@ -11,6 +11,8 @@ prompt pure
 #allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD
 
+export PURE_GIT_PULL=0
+
 ## keep background processes at full speed
 #setopt NOBGNICE
 ## restart running processes on exit
