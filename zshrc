@@ -109,16 +109,20 @@ source /usr/local/bin/aws_zsh_completer.sh
 export DOCKER_HOST=tcp://localhost:4243
 
 # PATH
-export PATH=/usr/local/bin:$PATH:/usr/local/packer:/usr/local/Cellar/fping/3.8/sbin
+export PATH=~/bin:/usr/local/bin:$PATH:/usr/local/packer:/usr/local/Cellar/fping/3.8/sbin
 
 # Google Cloud SDK
 export PATH=/Users/isao.shimizu/google-cloud-sdk/bin:$PATH
 
-#function ssh_window(){
-#    eval server=\${$#}
-#    tmux new-window -n $server "/usr/bin/ssh $@"
-#}
-#alias ssh=ssh_window
+function ssh_window(){
+  if [ "$TMUX" != "" ]; then
+    eval server=\${$#}
+    tmux new-window -n $server "/usr/bin/ssh $@"
+  else
+    /usr/bin/ssh $@
+  fi
+}
+alias ssh=ssh_window
 
 function print_known_hosts (){
   if [ -f $HOME/.ssh/known_hosts ]; then
