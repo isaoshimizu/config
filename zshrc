@@ -88,6 +88,7 @@ alias kt='bundle exec kitchen'
 alias vim_neobundle_install='vim +NeoBundleInstall! +qall'
 alias df='df -h'
 alias du='du -h'
+alias clip="nc localhost 8377"
 
 # editor
 export EDITOR=vim
