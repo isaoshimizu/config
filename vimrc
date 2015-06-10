@@ -83,6 +83,11 @@ NeoBundle 'Shougo/vimproc', {
 \ }
 
 
+" 不可視文字の表示
+set list
+" タブ、半角スペースの表示
+set listchars=tab:>-,trail:.
+
 " 検索文字列入力時に順次対象文字列にヒットさせない
 set noincsearch
 " Esc連打で検索時にハイライトを消す

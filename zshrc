@@ -74,6 +74,7 @@ alias vim_neobundle_install='vim +NeoBundleInstall! +qall'
 alias sed='gsed'
 alias df='df -h'
 alias du='du -h'
+alias gist='gist -c -o -p'
 
 # editor
 export EDITOR=vim
