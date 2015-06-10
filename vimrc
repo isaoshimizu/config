@@ -48,7 +48,7 @@ filetype off
 if has('vim_starting')
   set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand($HOME . '/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 filetype plugin indent on
 if neobundle#exists_not_installed_bundles()
   echomsg 'Not installed bundles : ' .
@@ -81,6 +81,7 @@ NeoBundle 'Shougo/vimproc', {
     \ 'unix' : 'make -f make_unix.mak',
   \ },
 \ }
+call neobundle#end()
 
 
 " 不可視文字の表示

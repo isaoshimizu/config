@@ -11,6 +11,8 @@ prompt pure
 #allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD
 
+export PURE_GIT_PULL=0
+
 ## keep background processes at full speed
 #setopt NOBGNICE
 ## restart running processes on exit
@@ -52,17 +54,30 @@ bindkey '^P' history-beginning-search-backward-end
 bindkey '^N' history-beginning-search-forward-end
 bindkey -e
 
-eval `gdircolors ~/.dir_colors`
 export TERM=xterm-256color
 
 # aliases
-alias ls='gls --color'
-alias la='gls -a --color'
-alias ll='gls -l --color'
-alias lla='gls -al --color'
-alias vim='/usr/local/bin/vim'
-alias emacs='/usr/local/bin/emacs'
-alias git='/usr/local/bin/git'
+case ${OSTYPE} in
+  darwin*)
+    eval `gdircolors ~/.dir_colors`
+    alias ls='gls --color'
+    alias la='gls -a --color'
+    alias ll='gls -l --color'
+    alias lla='gls -al --color'
+    alias vim='/usr/local/bin/vim'
+    alias emacs='/usr/local/bin/emacs'
+    alias git='/usr/local/bin/git'
+    alias sed='gsed'
+    ;;
+  linux*)
+    eval `dircolors ~/.dir_colors`
+    alias ls='ls --color'
+    alias la='ls -a --color'
+    alias ll='ls -l --color'
+    alias lla='ls -al --color'
+    ;;
+esac
+
 alias vi='vim'
 alias history='history 1'
 alias lv='lv -c -T8192'
@@ -71,10 +86,10 @@ alias java='java -Dfile.encoding=UTF-8'
 alias jar='jar -J-Dfile.encoding=UTF-8'
 alias kt='bundle exec kitchen'
 alias vim_neobundle_install='vim +NeoBundleInstall! +qall'
-alias sed='gsed'
 alias df='df -h'
 alias du='du -h'
 alias gist='gist -c -o -p'
+alias clip="nc localhost 8377"
 
 # editor
 export EDITOR=vim
@@ -90,22 +105,26 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # AWS CLI
-source /usr/local/share/zsh/site-functions/_aws
+source /usr/local/bin/aws_zsh_completer.sh
 
 # docker
 export DOCKER_HOST=tcp://localhost:4243
 
 # PATH
-export PATH=/usr/local/bin:$PATH:/usr/local/packer:/usr/local/Cellar/fping/3.8/sbin
+export PATH=~/bin:/usr/local/bin:$PATH:/usr/local/packer:/usr/local/Cellar/fping/3.8/sbin
 
 # Google Cloud SDK
 export PATH=/Users/isao.shimizu/google-cloud-sdk/bin:$PATH
 
-#function ssh_window(){
-#    eval server=\${$#}
-#    tmux new-window -n $server "/usr/bin/ssh $@"
-#}
-#alias ssh=ssh_window
+function ssh_window(){
+  if [ "$TMUX" != "" ]; then
+    eval server=\${$#}
+    tmux new-window -n $server "/usr/bin/ssh $@"
+  else
+    /usr/bin/ssh $@
+  fi
+}
+alias ssh=ssh_window
 
 function print_known_hosts (){
   if [ -f $HOME/.ssh/known_hosts ]; then
