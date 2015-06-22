@@ -90,6 +90,9 @@ alias df='df -h'
 alias du='du -h'
 alias gist='gist -c -o -p'
 alias clip="nc localhost 8377"
+# git alias
+alias g='git'
+alias -g B='`git branch -a | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
 
 # editor
 export EDITOR=vim
