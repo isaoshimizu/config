@@ -15,6 +15,7 @@ set showcmd
 set laststatus=2
 set showmatch
 set hlsearch
+set ttyfast
 
 set wildmenu
 set tabstop=4
@@ -26,63 +27,57 @@ set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,euc-jp,cp932,iso-2022-jp
 set fileencodings+=,ucs-2le,ucs-2
 
+" 全角対策
 if exists('&ambiwidth')
   set ambiwidth=double
 endif
-
-" :Fmt などで gofmt の代わりに goimports を使う
-let g:gofmt_command = 'goimports'
 
 " Go に付属の plugin と gocode を有効にする
 set rtp+=${GOROOT}/misc/vim
 set rtp+=${GOPATH}/src/github.com/nsf/gocode/vim
 
-" 保存時に :Fmt する
-au BufWritePre *.go Fmt
-au BufNewFile,BufRead *.go set sw=4 noexpandtab ts=4
-au FileType go compiler go
+call plug#begin('~/.vim/plugged')
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/neocomplcache'
+Plug 'Shougo/vimproc'
+Plug 'tpope/vim-endwise'
+Plug 'tomasr/molokai'
+Plug 'ujihisa/unite-colorscheme'
+Plug 'chrishunt/color-schemes'
+Plug 'bling/vim-airline'
+Plug 'Lokaltog/powerline'
+Plug 'Lokaltog/powerline-fonts'
+Plug 'tpope/vim-fugitive'
+Plug 'fatih/vim-go'
+Plug 'tpope/vim-rails'
+Plug 'scrooloose/nerdtree'
+Plug 'rking/ag.vim'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
+"Plug 'nixprime/cpsm'
+call plug#end()
 
-" neobundle
-set nocompatible
-filetype off
-if has('vim_starting')
-  set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
+if executable('ag')
+  let g:ctrlp_use_caching = 0
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
 endif
-call neobundle#begin(expand('~/.vim/bundle/'))
-filetype plugin indent on
-if neobundle#exists_not_installed_bundles()
-  echomsg 'Not installed bundles : ' .
-        \ string(neobundle#get_not_installed_bundle_names())
-  echomsg 'Please execute ":NeoBundleInstall" command.'
-endif
-let g:neobundle_default_git_protocol='https'
+"let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctrlp_open_new_file = 1
+let g:ctrlp_clear_cache_on_exit = 0
 
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'thinca/vim-ref.git'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tomasr/molokai'
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'chrishunt/color-schemes'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'Lokaltog/powerline'
-NeoBundle 'Lokaltog/powerline-fonts'
-NeoBundle 'tpope/vim-fugitive'
-
-NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-    \ 'windows' : 'make -f make_mingw32.mak',
-    \ 'cygwin' : 'make -f make_cygwin.mak',
-    \ 'mac' : 'make -f make_mac.mak',
-    \ 'unix' : 'make -f make_unix.mak',
-  \ },
-\ }
-call neobundle#end()
-
+" gocode
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 
 " 不可視文字の表示
 set list
@@ -94,10 +89,18 @@ set noincsearch
 " Esc連打で検索時にハイライトを消す
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
+nnoremap 1, 1gt<CR>
+nnoremap 2, 2gt<CR>
+nnoremap 3, 3gt<CR>
+nnoremap 4, 4gt<CR>
+nnoremap 5, 5gt<CR>
+nnoremap 6, 6gt<CR>
+nnoremap 7, 7gt<CR>
+nnoremap 8, 8gt<CR>
+nnoremap 9, 9gt<CR>
+
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
-
-let g:neocomplcache_enable_at_startup = 1
 
 filetype plugin on
 syntax enable
@@ -133,44 +136,33 @@ autocmd FileType ruby setl autoindent
 autocmd FileType ruby setl smartindent cinwords=if,else,for,while,try,except,finally,def,class
 autocmd FileType ruby setl tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
-autocmd FileType apache     setlocal sw=4 sts=4 ts=4 et
-autocmd FileType aspvbs     setlocal sw=4 sts=4 ts=4 noet
 autocmd FileType c          setlocal sw=4 sts=4 ts=4 et
 autocmd FileType cpp        setlocal sw=4 sts=4 ts=4 et
 autocmd FileType cs         setlocal sw=4 sts=4 ts=4 et
 autocmd FileType css        setlocal sw=4 sts=4 ts=4 noet
 autocmd FileType diff       setlocal sw=4 sts=4 ts=4 noet
-autocmd FileType eruby      setlocal sw=4 sts=4 ts=4 noet
 autocmd FileType html       setlocal sw=4 sts=4 ts=4 noet
 autocmd FileType java       setlocal sw=4 sts=4 ts=4 et
 autocmd FileType javascript setlocal sw=4 sts=4 ts=4 noet
 autocmd FileType perl       setlocal sw=4 sts=4 ts=4 et
 autocmd FileType php        setlocal sw=4 sts=4 ts=4 et
 autocmd FileType haml       setlocal sw=2 sts=2 ts=2 et
-autocmd FileType eruby      setlocal sw=2 sts=2 ts=2 et
 autocmd FileType sh         setlocal sw=4 sts=4 ts=4 et
 autocmd FileType sql        setlocal sw=4 sts=4 ts=4 et
-autocmd FileType vb         setlocal sw=4 sts=4 ts=4 noet
 autocmd FileType vim        setlocal sw=2 sts=2 ts=2 et
-autocmd FileType wsh        setlocal sw=4 sts=4 ts=4 et
 autocmd FileType xhtml      setlocal sw=4 sts=4 ts=4 noet
 autocmd FileType xml        setlocal sw=4 sts=4 ts=4 noet
 autocmd FileType yaml       setlocal sw=2 sts=2 ts=2 et
 autocmd FileType zsh        setlocal sw=2 sts=2 ts=2 et
 autocmd FileType scala      setlocal sw=2 sts=2 ts=2 et
-autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
-autocmd FileType puppet     setlocal sw=2 sts=2 ts=2 et
 
-" 80文字以上をハイライトhttp://vim-users.jp/2011/05/hack217/
-set textwidth=0
-if exists('&colorcolumn')
-   set colorcolumn=+1
-   " sh,perl,vim,...の部分は自分が使う
-   " プログラミング言語のfiletypeに合わせてください
-   autocmd FileType sh,perl,vim,ruby,python setlocal textwidth=80
-endif
+let g:syntastic_mode_map = { 'mode': 'passive',
+    \ 'active_filetypes': ['go'] }
+let g:syntastic_go_checkers = ['go', 'golint']
 
-autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+"let g:syntastic_mode_map = { 'mode': 'passive',
+"            \ 'active_filetypes': ['ruby'] }
+"let g:syntastic_ruby_checkers = ['rubocop']
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1

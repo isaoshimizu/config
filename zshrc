@@ -11,8 +11,6 @@ prompt pure
 #allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD
 
-export PURE_GIT_PULL=0
-
 ## keep background processes at full speed
 #setopt NOBGNICE
 ## restart running processes on exit
@@ -55,6 +53,7 @@ bindkey '^N' history-beginning-search-forward-end
 bindkey -e
 
 export TERM=xterm-256color
+export PURE_GIT_PULL=0
 
 # aliases
 case ${OSTYPE} in
@@ -68,6 +67,7 @@ case ${OSTYPE} in
     alias emacs='/usr/local/bin/emacs'
     alias git='/usr/local/bin/git'
     alias sed='gsed'
+    export PATH=~/bin:/usr/local/bin:$PATH:/usr/local/packer:/usr/local/Cellar/fping/3.8/sbin
     ;;
   linux*)
     eval `dircolors ~/.dir_colors`
@@ -75,9 +75,19 @@ case ${OSTYPE} in
     alias la='ls -a --color'
     alias ll='ls -l --color'
     alias lla='ls -al --color'
+    export PATH=~/bin:/usr/local/bin:$PATH
+
+    function ssh_window(){
+      if [ "$TMUX" != "" ]; then
+        eval server=\${$#}
+        tmux new-window -n $server "/usr/bin/ssh $@"
+      else
+        /usr/bin/ssh $@
+      fi
+    }
+    alias ssh=ssh_window
     ;;
 esac
-
 alias vi='vim'
 alias history='history 1'
 alias lv='lv -c -T8192'
@@ -89,7 +99,6 @@ alias vim_neobundle_install='vim +NeoBundleInstall! +qall'
 alias df='df -h'
 alias du='du -h'
 alias gist='gist -c -o -p'
-alias clip="nc localhost 8377"
 # git alias
 alias g='git'
 alias -g B='`git branch -a | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
@@ -98,36 +107,21 @@ alias -g B='`git branch -a | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s
 export EDITOR=vim
 export SVN_EDITOR=vim
 
-# golang
-export GOPATH=$HOME/go
-export GOROOT=$HOME/golang
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # AWS CLI
-source /usr/local/bin/aws_zsh_completer.sh
+source /usr/local/share/zsh/site-functions/_aws
+
+# Perlbrew
+source ~/perl5/perlbrew/etc/bashrc
 
 # docker
 export DOCKER_HOST=tcp://localhost:4243
 
-# PATH
-export PATH=~/bin:/usr/local/bin:$PATH:/usr/local/packer:/usr/local/Cellar/fping/3.8/sbin
-
 # Google Cloud SDK
-export PATH=/Users/isao.shimizu/google-cloud-sdk/bin:$PATH
-
-function ssh_window(){
-  if [ "$TMUX" != "" ]; then
-    eval server=\${$#}
-    tmux new-window -n $server "/usr/bin/ssh $@"
-  else
-    /usr/bin/ssh $@
-  fi
-}
-alias ssh=ssh_window
+export PATH=~/google-cloud-sdk/bin:$PATH
 
 function print_known_hosts (){
   if [ -f $HOME/.ssh/known_hosts ]; then
@@ -147,3 +141,6 @@ elif [ -S $agent ]; then
 else
     echo "no ssh-agent"
 fi
+
+# gvm
+[[ -s "~/.gvm/scripts/gvm" ]] && source "~/.gvm/scripts/gvm"
