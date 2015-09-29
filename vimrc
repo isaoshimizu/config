@@ -50,12 +50,15 @@ Plug 'Lokaltog/powerline-fonts'
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go'
 Plug 'tpope/vim-rails'
+Plug 'markcornick/vim-terraform'
 Plug 'scrooloose/nerdtree'
 Plug 'rking/ag.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
-"Plug 'nixprime/cpsm'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'rhysd/unite-codic.vim'
+Plug 'koron/codic-vim'
 call plug#end()
 
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
@@ -75,6 +78,10 @@ endif
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_open_new_file = 1
 let g:ctrlp_clear_cache_on_exit = 0
+
+"easymotion
+let g:EasyMotion_do_mapping = 0 "Disable default mappings
+nmap s <Plug>(easymotion-s2)
 
 " gocode
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
