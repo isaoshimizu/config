@@ -59,6 +59,7 @@ Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'rhysd/unite-codic.vim'
 Plug 'koron/codic-vim'
+Plug 'bronson/vim-trailing-whitespace'
 call plug#end()
 
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
