@@ -60,6 +60,7 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'rhysd/unite-codic.vim'
 Plug 'koron/codic-vim'
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
@@ -97,6 +98,13 @@ set noincsearch
 " Esc連打で検索時にハイライトを消す
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
+" vim-indent-guides
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=110
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=140
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_guide_size=1
+
 nnoremap 1, 1gt<CR>
 nnoremap 2, 2gt<CR>
 nnoremap 3, 3gt<CR>
@@ -114,7 +122,7 @@ filetype plugin on
 syntax enable
 set t_Co=256
 set background=dark
-"colorscheme molokai 
+"colorscheme molokai
 colorscheme base16-railscasts
 highlight clear SignColumn
 highlight VertSplit    ctermbg=236
