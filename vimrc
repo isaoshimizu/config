@@ -86,7 +86,7 @@ let g:EasyMotion_do_mapping = 0 "Disable default mappings
 nmap s <Plug>(easymotion-s2)
 
 " gocode
-exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+"exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 
 " 不可視文字の表示
 set list
@@ -100,8 +100,8 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 " vim-indent-guides
 let g:indent_guides_auto_colors=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=110
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=140
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=238
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=234
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=1
 
@@ -170,11 +170,12 @@ autocmd FileType xhtml      setlocal sw=4 sts=4 ts=4 noet
 autocmd FileType xml        setlocal sw=4 sts=4 ts=4 noet
 autocmd FileType yaml       setlocal sw=2 sts=2 ts=2 et
 autocmd FileType zsh        setlocal sw=2 sts=2 ts=2 et
+autocmd FileType sh         setlocal sw=2 sts=2 ts=2 et
 autocmd FileType scala      setlocal sw=2 sts=2 ts=2 et
 
-let g:syntastic_mode_map = { 'mode': 'passive',
-    \ 'active_filetypes': ['go'] }
-let g:syntastic_go_checkers = ['go', 'golint']
+"let g:syntastic_mode_map = { 'mode': 'passive',
+"    \ 'active_filetypes': ['go'] }
+"let g:syntastic_go_checkers = ['go', 'golint']
 
 "let g:syntastic_mode_map = { 'mode': 'passive',
 "            \ 'active_filetypes': ['ruby'] }

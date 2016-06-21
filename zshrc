@@ -111,12 +111,24 @@ export SVN_EDITOR=vim
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+# golang
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+
 # AWS CLI
-source /usr/local/share/zsh/site-functions/_aws
+#source /usr/local/share/zsh/site-functions/_aws
 
 # Perlbrew
 source ~/perl5/perlbrew/etc/bashrc
 
+## pyenv
+#export PYENV_ROOT="$HOME/.pyenv"
+#export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init -)"
+#
+## nodebrew
+export PATH="$HOME/.nodebrew/current/bin:$PATH"
+#
 # docker
 export DOCKER_HOST=tcp://localhost:4243
 
@@ -144,3 +156,6 @@ fi
 
 # gvm
 [[ -s "~/.gvm/scripts/gvm" ]] && source "~/.gvm/scripts/gvm"
+
+keychain --nogui --quiet ~/ssh-keys/siau_id_rsa
+source ~/.keychain/$HOST-sh
