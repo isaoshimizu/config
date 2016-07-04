@@ -118,14 +118,6 @@ export PATH="$GOPATH/bin:$PATH"
 # AWS CLI
 #source /usr/local/share/zsh/site-functions/_aws
 
-# Perlbrew
-source ~/perl5/perlbrew/etc/bashrc
-
-## pyenv
-#export PYENV_ROOT="$HOME/.pyenv"
-#export PATH="$PYENV_ROOT/bin:$PATH"
-#eval "$(pyenv init -)"
-#
 ## nodebrew
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
 #

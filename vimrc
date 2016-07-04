@@ -61,6 +61,8 @@ Plug 'rhysd/unite-codic.vim'
 Plug 'koron/codic-vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'vim-ruby/vim-ruby'
+Plug 'scrooloose/syntastic'
 call plug#end()
 
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
@@ -118,8 +120,11 @@ nnoremap 9, 9gt<CR>
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 
+set nocompatible
+filetype on
 filetype plugin on
-syntax enable
+filetype indent on
+syntax on
 set t_Co=256
 set background=dark
 "colorscheme molokai
@@ -184,3 +189,6 @@ autocmd FileType scala      setlocal sw=2 sts=2 ts=2 et
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
