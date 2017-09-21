@@ -16,6 +16,7 @@ set laststatus=2
 set showmatch
 set hlsearch
 set ttyfast
+set breakindent
 
 set wildmenu
 set tabstop=4
@@ -63,6 +64,7 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/syntastic'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
@@ -192,3 +194,5 @@ let g:airline_powerline_fonts = 1
 
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
+
+set updatetime=250

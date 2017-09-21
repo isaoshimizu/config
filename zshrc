@@ -107,12 +107,15 @@ alias -g B='`git branch -a | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s
 export EDITOR=vim
 export SVN_EDITOR=vim
 
+# diff-highlight
+export PATH=$PATH:/usr/local/share/git-core/contrib/diff-highlight
+
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # golang
-export GOPATH="$HOME/go"
+export GOPATH="$HOME"
 export PATH="$GOPATH/bin:$PATH"
 
 # AWS CLI
@@ -146,8 +149,7 @@ else
     echo "no ssh-agent"
 fi
 
-# gvm
-[[ -s "~/.gvm/scripts/gvm" ]] && source "~/.gvm/scripts/gvm"
-
 keychain --nogui --quiet ~/ssh-keys/siau_id_rsa
 source ~/.keychain/$HOST-sh
+
+export PATH="/usr/local/opt/mysql@5.5/bin:$PATH"
