@@ -118,12 +118,6 @@ eval "$(rbenv init -)"
 export GOPATH="$HOME"
 export PATH="$GOPATH/bin:$PATH"
 
-# AWS CLI
-#source /usr/local/share/zsh/site-functions/_aws
-
-## nodebrew
-export PATH="$HOME/.nodebrew/current/bin:$PATH"
-#
 # docker
 export DOCKER_HOST=tcp://localhost:4243
 
@@ -148,8 +142,3 @@ elif [ -S $agent ]; then
 else
     echo "no ssh-agent"
 fi
-
-keychain --nogui --quiet ~/ssh-keys/siau_id_rsa
-source ~/.keychain/$HOST-sh
-
-export PATH="/usr/local/opt/mysql@5.5/bin:$PATH"
