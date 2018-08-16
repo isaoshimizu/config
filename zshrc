@@ -118,9 +118,6 @@ eval "$(rbenv init -)"
 export GOPATH="$HOME"
 export PATH="$GOPATH/bin:$PATH"
 
-# docker
-export DOCKER_HOST=tcp://localhost:4243
-
 # Google Cloud SDK
 export PATH=~/google-cloud-sdk/bin:$PATH
 
@@ -142,3 +139,25 @@ elif [ -S $agent ]; then
 else
     echo "no ssh-agent"
 fi
+
+h=()
+if [[ -r ~/.ssh/config ]]; then
+  h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+fi
+if [[ $#h -gt 0 ]]; then
+  zstyle ':completion:*:ssh:*' hosts $h
+  zstyle ':completion:*:slogin:*' hosts $h
+fi
+
+function peco-ec2ssh () {
+  sshhostname=$(grep '### EC2SSH BEGIN ###' ~/.ssh/config -A 100000 | grep -E 'Host[[:space:]]+[^*]' | awk '{print $2 " - " $4;}' | peco | cut -d " " -f 3)
+  ssh $sshhostname
+}
+
+alias ec2="peco-ec2ssh"
+
+code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* }
+
+mp3_128k () { ffmpeg -i $1 -ab 128 -ar 44100 $1.mp3 }
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
