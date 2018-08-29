@@ -161,3 +161,5 @@ code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* }
 mp3_128k () { ffmpeg -i $1 -ab 128 -ar 44100 $1.mp3 }
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+
+eval "$(direnv hook zsh)"
