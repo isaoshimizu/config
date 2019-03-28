@@ -163,3 +163,12 @@ export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
 eval "$(direnv hook zsh)"
+
+# libxml
+export PATH="/usr/local/opt/libxml2/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/libxml2/lib"
+export CPPFLAGS="-I/usr/local/opt/libxml2/include"
+export PKG_CONFIG_PATH="/usr/local/opt/libxml2/lib/pkgconfig"
+
+# zsh-autosuggestions
+source ~/zsh-autosuggestions/zsh-autosuggestions.zsh
