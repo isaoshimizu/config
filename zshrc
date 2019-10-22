@@ -154,8 +154,6 @@ function peco-ec2ssh () {
   ssh $sshhostname
 }
 
-alias ec2="peco-ec2ssh"
-
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* }
 
 mp3_128k () { ffmpeg -i $1 -ab 128 -ar 44100 $1.mp3 }
@@ -163,12 +161,6 @@ export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
 eval "$(direnv hook zsh)"
-
-# libxml
-export PATH="/usr/local/opt/libxml2/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/libxml2/lib"
-export CPPFLAGS="-I/usr/local/opt/libxml2/include"
-export PKG_CONFIG_PATH="/usr/local/opt/libxml2/lib/pkgconfig"
 
 # zsh-autosuggestions
 source ~/zsh-autosuggestions/zsh-autosuggestions.zsh
