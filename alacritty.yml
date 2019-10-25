@@ -7,8 +7,8 @@ dpi:
 
 window:
   dimensions:
-    columns: 150
-    lines: 45
+    columns: 140
+    lines: 40
 
   padding:
     x: 10
