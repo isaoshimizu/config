@@ -149,7 +149,7 @@ if [[ $#h -gt 0 ]]; then
   zstyle ':completion:*:slogin:*' hosts $h
 fi
 
-function peco-ec2ssh () {
+function ec2 () {
   sshhostname=$(grep '### EC2SSH BEGIN ###' ~/.ssh/config -A 100000 | grep -E 'Host[[:space:]]+[^*]' | awk '{print $2 " - " $4;}' | peco | cut -d " " -f 3)
   ssh $sshhostname
 }
@@ -164,3 +164,4 @@ eval "$(direnv hook zsh)"
 
 # zsh-autosuggestions
 source ~/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/powerlevel10k/powerlevel10k.zsh-theme
