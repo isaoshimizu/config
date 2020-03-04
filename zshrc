@@ -114,6 +114,9 @@ export PATH=$PATH:/usr/local/share/git-core/contrib/diff-highlight
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+# python
+export PATH="$HOME/Library/Python/3.7/bin:$PATH"
+
 # golang
 export GOPATH="$HOME"
 export PATH="$GOPATH/bin:$PATH"
