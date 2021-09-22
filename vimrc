@@ -63,6 +63,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-ruby/vim-ruby'
 "Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-gitgutter'
+Plug 'chriskempson/base16-vim'
 call plug#end()
 
 nnoremap <silent><C-e> :NERDTreeToggle<CR>

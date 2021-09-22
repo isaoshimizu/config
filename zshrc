@@ -2,6 +2,7 @@
 # Author: Isao Shimizu <isaoshimizu@gmail.com>
 
 fpath=(~/.zfunctions ${fpath})
+fpath+=$HOME/pure
 
 autoload -U compinit
 compinit
@@ -63,11 +64,10 @@ case ${OSTYPE} in
     alias la='gls -a --color'
     alias ll='gls -l --color'
     alias lla='gls -al --color'
-    alias vim='/usr/local/bin/vim'
-    alias emacs='/usr/local/bin/emacs'
-    alias git='/usr/local/bin/git'
+    alias vim='/opt/homebrew/bin/vim'
+    alias git='/opt/homebrew/bin/git'
     alias sed='gsed'
-    export PATH=~/bin:/usr/local/bin:$PATH:/usr/local/packer:/usr/local/Cellar/fping/3.8/sbin
+    export PATH=~/bin:/opt/homebrew/bin:$PATH
     ;;
   linux*)
     eval `dircolors ~/.dir_colors`
@@ -115,7 +115,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # python
-export PATH="$HOME/Library/Python/3.7/bin:$PATH"
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
 # golang
 export GOPATH="$HOME"
@@ -160,8 +160,6 @@ function ec2 () {
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* }
 
 mp3_128k () { ffmpeg -i $1 -ab 128 -ar 44100 $1.mp3 }
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
 eval "$(direnv hook zsh)"
 
@@ -171,3 +169,12 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Node.js
+export PATH="/opt/homebrew/opt/node@12/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then . '~/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then . '~/google-cloud-sdk/completion.zsh.inc'; fi
